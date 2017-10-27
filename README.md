@@ -29,3 +29,5 @@ This solution uses an array of objects to keep track of the most recently (and l
 The problem with this solution is that the get() function has to iterate over the entire array of items until it finds the requested key. If the cache limit is high, this become very inefficient.
 
 ## Solution 2
+
+TBC, looking into using linked lists to complete

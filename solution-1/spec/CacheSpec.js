@@ -1,3 +1,5 @@
+// const Cache = require("../src/Cache.js").Cache;
+
 describe("Cache", function() {
 	beforeEach(function() {
 		cache = new Cache();
