@@ -30,4 +30,6 @@ The problem with this solution is that the get() function has to iterate over th
 
 ## Solution 2
 
-TBC, looking into using linked lists to complete
+TBC, looking into using linked lists to complete.
+
+Learning how to solve using [this tutorial](http://learnjswith.me/implement-an-lru-cache-in-javascript/), extracting and interpreting while I learn.
