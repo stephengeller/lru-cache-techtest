@@ -8,10 +8,7 @@ class Cache {
 		var items = this.cacheItems;
 		for (var i = 0; i < items.length; i++) {
 			if (items[i][key] != undefined) {
-				var obj = items[i];
-				this.cacheItems.splice(i, 1);
-				this.cacheItems.unshift(obj);
-				return items[i][key];
+				return this._returnValues(i, key);
 			}
 		}
 	}
@@ -24,6 +21,14 @@ class Cache {
 			var lastItem = this.cacheItems.length - 1;
 			this.cacheItems.splice(lastItem, 1);
 		}
+	}
+
+	_returnValues(index, key) {
+		var items = this.cacheItems;
+		var obj = items[index];
+		this.cacheItems.splice(index, 1);
+		this.cacheItems.unshift(obj);
+		return this.cacheItems[index][key];
 	}
 }
 

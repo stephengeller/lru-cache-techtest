@@ -29,7 +29,7 @@ describe("Cache", function() {
 	});
 
 	describe("#get", function() {
-		it("returns a real obj", function() {
+		fit("returns a real obj", function() {
 			object = {
 				name: "Stephen",
 				occupation: "Unemployed"
