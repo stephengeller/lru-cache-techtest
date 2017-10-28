@@ -38,8 +38,6 @@ class Cache {
 		} else {
 			// if the cache is full
 			if (this._size >= this.LIMIT) {
-				console.log(this._map[this._tail]);
-				console.log("deleting " + this._map[this._tail]);
 				delete this._map[this._tail];
 				// maintain limit size
 				this._size--;
@@ -96,7 +94,3 @@ class Cache {
 }
 
 module.exports = Cache;
-
-cache = new Cache();
-
-cache.set(1, 2);

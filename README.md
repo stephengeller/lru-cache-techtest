@@ -29,12 +29,15 @@ This solution uses an array of objects to keep track of the most recently (and l
 The problem with this solution is that the get() function has to iterate over the entire array of items until it finds the requested key. If the cache limit is high, this become very inefficient.
 
 ## Solution 2
-
-TBC, looking into using linked lists to complete.
-
 Learning how to solve using [this tutorial](http://learnjswith.me/implement-an-lru-cache-in-javascript/), extracting and interpreting while I learn.
 
 ###### Interpretation
 It appears that this solution works through having each node remember a key, a value and the nodes before and after it - this maintains the order. In turn, the cache remembers the most recently and least recently used items, in order to know what to delete.
 
 When setHead gets called, the first item in the list becomes the next item in the list. For example, if node3 gets called and node5 was called before that, node3.next becomes node5, and node3.prev = null.
+
+###### Issues
+Currently, fully deleting the items from the cache doesn't work, as it tries to delete an undefined item. This fails one of the four tests.
+
+### Code comments
+Although I normally avoid keeping them, I have been written comments throughout solution-2 to help get to grips with the solution provided in the tutorial.
