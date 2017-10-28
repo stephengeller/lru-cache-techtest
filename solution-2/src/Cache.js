@@ -10,10 +10,12 @@ class Node {
 class Cache {
 	constructor(limit = 5) {
 		this.LIMIT = limit;
-		this.cacheItems = [];
 		this._map = {};
+		// front of the cache
 		this._head = null;
+		// back of the cache?
 		this._tail = null;
+		// size of the cache
 		this._size = 0;
 	}
 
@@ -22,6 +24,7 @@ class Cache {
 			const value = this._map[key].value;
 			const node = new Node(key, value);
 			this.remove(key);
+			// Sets the head of the cache
 			this.setHead(node);
 			return value;
 		}
@@ -29,15 +32,18 @@ class Cache {
 
 	set(key, value) {
 		const node = new Node(key, value);
-		console.log(node);
 		if (this._map[key]) {
 			// if the key already exists
 			this.remove(key);
 		} else {
 			// if the cache is full
 			if (this._size >= this.LIMIT) {
+				console.log(this._map[this._tail]);
+				console.log("deleting " + this._map[this._tail]);
 				delete this._map[this._tail];
+				// maintain limit size
 				this._size--;
+				// item
 				this._tail = this._tail.prev;
 				this._tail.next = null;
 			}
@@ -45,9 +51,11 @@ class Cache {
 		this.setHead(node);
 	}
 
+	// Sets the node to the first in the list
 	setHead(node) {
 		// node remembers before and after it
 		node.next = this._head;
+		//
 		node.prev = null;
 		// if the head exists
 		if (this._head !== null) {
@@ -58,6 +66,31 @@ class Cache {
 		// if the tail does not exist
 		if (this._tail === null) {
 			this._tail = node;
+		}
+		// increases size
+		this._size++;
+		this._map[node.key] = node;
+	}
+
+	// remove an item from the cache
+	remove(key) {
+		// if it exists in the map
+		if (this._map[key]) {
+			const node = this._map[key];
+			// update head and tail
+			if (node.prev !== null) {
+				node.prev.next = node.next;
+			} else {
+				this._head = node.next;
+			}
+			if (node.next !== null) {
+				node.next.prev = node.prev;
+			} else {
+				this._tail = node.prev;
+			}
+			// actually do the removal stuff
+			delete this._map[key];
+			this._size--;
 		}
 	}
 }

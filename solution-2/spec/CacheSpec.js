@@ -9,8 +9,8 @@ describe("Cache", function() {
 				name: "Stephen",
 				occupation: "Unemployed"
 			});
-			expect(cache.cacheItems[0].Stephen.name).toEqual("Stephen");
-			expect(cache.cacheItems[0].Stephen.occupation).toEqual("Unemployed");
+			expect(cache._map.Stephen.value.name).toEqual("Stephen");
+			expect(cache._map.Stephen).not.toEqual(undefined);
 		});
 
 		it("limits to 5", function() {
@@ -20,9 +20,9 @@ describe("Cache", function() {
 			cache.set("key4", "value4");
 			cache.set("key5", "value5");
 			cache.set("key6", "value6");
-			lastItem = cache.cacheItems.length - 1;
-			expect(cache.cacheItems.length).toEqual(5);
-			expect(cache.cacheItems[lastItem].key2).toEqual("value2");
+			expect(cache._size).toEqual(5);
+			console.log(cache._map);
+			expect(cache._map.key1).toEqual(undefined);
 		});
 	});
 
@@ -36,17 +36,17 @@ describe("Cache", function() {
 			expect(cache.get("Stephen")).toEqual(object);
 		});
 
-		it("moves object to front of array", function() {
+		it("moves object to front of cache", function() {
 			cache.set("A", "1");
 			cache.set("B", "2");
 			cache.set("C", "3");
 			cache.set("D", "4");
 			cache.set("E", "5");
-			expect(cache.cacheItems[0]).toEqual({ E: "5" });
+			expect(cache._head.key).toEqual("E");
+			expect(cache._tail.key).toEqual("A");
 			cache.get("C");
-			expect(cache.cacheItems[0]).toEqual({ C: "3" });
-			lastItem = cache.cacheItems.length - 1;
-			expect(cache.cacheItems[lastItem]).toEqual({ A: "1" });
+			expect(cache._tail.key).toEqual("A");
+			expect(cache._head.key).toEqual("C");
 		});
 	});
 });
