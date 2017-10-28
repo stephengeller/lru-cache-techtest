@@ -31,12 +31,12 @@ The problem with this solution is that the get() function has to iterate over th
 ## Solution 2
 Learning how to solve using [this tutorial](http://learnjswith.me/implement-an-lru-cache-in-javascript/), extracting and interpreting while I learn.
 
-###### Interpretation
+##### Interpretation
 It appears that this solution works through having each node remember a key, a value and the nodes before and after it - this maintains the order. In turn, the cache remembers the most recently and least recently used items, in order to know what to delete.
 
 When setHead gets called, the first item in the list becomes the next item in the list. For example, if node3 gets called and node5 was called before that, node3.next becomes node5, and node3.prev = null.
 
-###### Issues
+##### Issues
 Currently, fully deleting the items from the cache doesn't work, as it tries to delete an undefined item. This fails one of the four tests.
 
 ### Code comments
