@@ -36,6 +36,9 @@ It appears that this solution works through having each node remember a key, a v
 
 When setHead gets called, the first item in the list becomes the next item in the list. For example, if node3 gets called and node5 was called before that, node3.next becomes node5, and node3.prev = null.
 
+The logic works (I think) because you can chain the nodes together in a linked list. For example, if 5 items were added to the cache sequentially,
+`cache._head.next.next.next.next` would be node 1, and the last item on the list. In this instance, `cache._head` would be item 5.
+
 ##### Issues
 Currently, fully deleting the items from the cache doesn't work, as it tries to delete an undefined item. This fails one of the four tests.
 
